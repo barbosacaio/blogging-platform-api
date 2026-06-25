@@ -1,0 +1,22 @@
+{
+  "name": "blogging-platform-api",
+  "version": "1.0.0",
+  "description": "**Portfolio Project** — A RESTful API with CRUD routes for a personal blog. The included core functions include creating posts, updating a post, deleting a post, searching posts by ID, listing all posts, and filtering by keywords.",
+  "bugs": {
+    "url": "https://github.com/barbosacaio/blogging-platform-api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barbosacaio/blogging-platform-api.git"
+  },
+  "author": "@barbosacaio",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "build": "tsc",
+      "dev": "ts-node src/app.ts",
+      "start": "node dist/app.js",
+      "lint": "eslint src",
+      "prettier": "prettier --write src"
+  }
+}
