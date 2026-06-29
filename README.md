@@ -25,11 +25,13 @@ blogging-platform-api/
 │   │   ├── posts.router.ts
 │   │   ├── posts.controller.ts
 │   │   └── posts.repository.ts
+│   ├── service/
+│   │   └── migration.service.ts           # simulates 'prisma migrate deploy'
 │   ├── middleware/
 │   │   └── errorHandler.ts
 │   └── app.ts
 ├── scripts/
-│   └── migrate.ts           # simulates 'prisma migrate deploy'
+│   └── migrate.ts
 ├── .prettierrc
 ├── eslint.config.js
 ├── package.json
@@ -59,9 +61,6 @@ blogging-platform-api/
    ```bash
    npm run dev
    ```
-
-4. ...
----
 
 ## 🤝 Contributing
 
