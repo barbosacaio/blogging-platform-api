@@ -2,7 +2,7 @@
 
 > **Portfolio Project** — A RESTful API with CRUD routes for a personal blog. The included core functions include creating posts, updating a post, deleting a post, searching posts by ID, listing all posts, and filtering by keywords.
 
-![Status](https://img.shields.io/badge/status-in%20development-yellow)
+![Status](https://img.shields.io/badge/status-complete-green)
 
 ---
 
