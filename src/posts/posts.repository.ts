@@ -1,6 +1,12 @@
 import pool from '../database/pool';
 import { AppError } from '../middleware/errorHandler';
 
+export interface updatePostDTO {
+  title?: string;
+  content?: string;
+  category?: string;
+}
+
 export async function getAllPosts(search?: string) {
   try {
     let posts;
@@ -76,6 +82,48 @@ export async function createPost(
   } catch (error) {
     console.error(error);
     throw new AppError('Failed to add new post', 400);
+  }
+}
+
+export async function updatePost(postId: string, dto: updatePostDTO) {
+  const post = await (
+    await pool.query(`SELECT * FROM post WHERE id = $1;`, [postId])
+  ).rows[0];
+
+  if (!post) {
+    throw new AppError(`No post found with ID ${postId}`, 404);
+  }
+
+  if (dto.title !== undefined) {
+    post.title = dto.title;
+  }
+
+  if (dto.content !== undefined) {
+    post.content = dto.content;
+  }
+
+  if (dto.category !== undefined) {
+    post.category = dto.category;
+  }
+
+  try {
+    const result = await pool.query(
+      `
+                UPDATE post
+                SET
+                    title = $1,
+                    content = $2,
+                    category = $3
+                WHERE id = $4
+                RETURNING *;
+            `,
+      [post.title, post.content, post.category, postId],
+    );
+
+    return result.rows;
+  } catch (error) {
+    console.error(error);
+    throw new AppError(`Failed to update the post with ID ${postId}`, 500);
   }
 }
 

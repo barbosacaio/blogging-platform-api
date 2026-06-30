@@ -3,6 +3,8 @@ import {
   getAllPosts,
   getBlogPost,
   createPost,
+  updatePost,
+  updatePostDTO,
   deletePost,
 } from './posts.repository';
 import { AppError } from '../middleware/errorHandler';
@@ -57,6 +59,23 @@ export async function createPostController(req: Request, res: Response) {
   } catch (error) {
     console.error(error);
     throw new AppError('Failed to add new post', 400);
+  }
+}
+
+export async function updatePostController(req: Request, res: Response) {
+  const postId = req.params.postId as string;
+  const dto: updatePostDTO = {
+    title: req.body?.title,
+    content: req.body?.content,
+    category: req.body?.category,
+  };
+
+  try {
+    const post = await updatePost(postId, dto);
+    return res.status(200).json(post);
+  } catch (error) {
+    console.error(error);
+    throw new AppError(`Failed to update the post with ID ${postId}`, 500);
   }
 }
 
