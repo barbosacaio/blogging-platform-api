@@ -1,5 +1,6 @@
 import express from 'express';
 import { migrate } from './service/migration.service';
+import { postRoutes } from './posts/posts.routes';
 import { errorMiddleware } from './middleware/errorHandler';
 
 const app = express();
@@ -16,6 +17,7 @@ app.get('/health', (req, res) => {
   res.status(200).json(health);
 });
 
+app.use('/posts', postRoutes);
 app.use(errorMiddleware);
 
 async function main() {
