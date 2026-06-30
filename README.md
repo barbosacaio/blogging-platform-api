@@ -62,6 +62,20 @@ blogging-platform-api/
    npm run dev
    ```
 
+---
+
+## 📡 API Endpoints
+
+| Method   | Endpoint            | Description              |
+| -------- | ------------------- | ------------------------ |
+| `GET`   | `/posts/`    | Lists all posts        |
+| `GET`   | `/posts/:postId`    | Lists a specific post        |
+| `GET`   | `/posts/?search=`    | Searches posts by title/content        |
+| `POST`   | `/posts/`    | Adds a new post        |
+| `PATCH`   | `/posts/:postId`    | Updates a post        |
+| `DELETE`   | `/posts/:postId`    | Deletes a post        |
+---
+
 ## 🤝 Contributing
 
 This is a personal portfolio project, but suggestions and feedback are welcome! Feel free to open an [issue](https://github.com/barbosacaio/blogging-platform-api/issues).
