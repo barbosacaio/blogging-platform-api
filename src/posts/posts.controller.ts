@@ -3,8 +3,16 @@ import { getAllPosts, getBlogPost } from './posts.repository';
 import { AppError } from '../middleware/errorHandler';
 
 export async function getAllPostsController(req: Request, res: Response) {
+  const search = req.query?.search as string;
+
   try {
-    const posts = await getAllPosts();
+    let posts;
+
+    if (search) {
+      posts = await getAllPosts(search);
+    } else {
+      posts = await getAllPosts();
+    }
     if (posts.length === 0) {
       res.status(404).json('No posts found');
     } else {
