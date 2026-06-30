@@ -78,3 +78,14 @@ export async function createPost(
     throw new AppError('Failed to add new post', 400);
   }
 }
+
+export async function deletePost(postId: string) {
+  try {
+    const post = await pool.query(`DELETE FROM post WHERE id = $1;`, [postId]);
+
+    return post.rowCount;
+  } catch (error) {
+    console.error(error);
+    throw new AppError(`Failed to delete the post with ID ${postId}`, 500);
+  }
+}

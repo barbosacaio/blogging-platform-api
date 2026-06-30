@@ -1,5 +1,10 @@
 import type { Request, Response } from 'express';
-import { getAllPosts, getBlogPost, createPost } from './posts.repository';
+import {
+  getAllPosts,
+  getBlogPost,
+  createPost,
+  deletePost,
+} from './posts.repository';
 import { AppError } from '../middleware/errorHandler';
 
 export async function getAllPostsController(req: Request, res: Response) {
@@ -52,5 +57,22 @@ export async function createPostController(req: Request, res: Response) {
   } catch (error) {
     console.error(error);
     throw new AppError('Failed to add new post', 400);
+  }
+}
+
+export async function deletePostController(req: Request, res: Response) {
+  const postId = req.params.postId as string;
+
+  try {
+    const result = await deletePost(postId);
+
+    if (result === 0) {
+      res.status(404).json('No posts found');
+    } else {
+      res.status(204).end();
+    }
+  } catch (error) {
+    console.error(error);
+    throw new AppError(`Failed to delete the post with ID ${postId}`, 500);
   }
 }
