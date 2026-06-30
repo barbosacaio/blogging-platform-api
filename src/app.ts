@@ -1,5 +1,6 @@
 import express from 'express';
 import { migrate } from './service/migration.service';
+import { errorMiddleware } from './middleware/errorHandler';
 
 const app = express();
 app.use(express.json());
@@ -14,6 +15,8 @@ app.get('/health', (req, res) => {
 
   res.status(200).json(health);
 });
+
+app.use(errorMiddleware);
 
 async function main() {
   try {
