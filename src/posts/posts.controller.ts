@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { getAllPosts, getBlogPost } from './posts.repository';
+import { getAllPosts, getBlogPost, createPost } from './posts.repository';
 import { AppError } from '../middleware/errorHandler';
 
 export async function getAllPostsController(req: Request, res: Response) {
@@ -37,5 +37,20 @@ export async function getPostController(req: Request, res: Response) {
   } catch (error) {
     console.error(error);
     throw new AppError(`Failed to get post with ID ${postId}`, 500);
+  }
+}
+
+export async function createPostController(req: Request, res: Response) {
+  const title = req.body.title as string;
+  const content = req.body.content as string;
+  const category = req.body.category as string;
+  const tags = (req.body.tags as number[]) ?? [];
+
+  try {
+    const post = await createPost(title, content, category, tags);
+    res.status(201).json(post);
+  } catch (error) {
+    console.error(error);
+    throw new AppError('Failed to add new post', 400);
   }
 }
